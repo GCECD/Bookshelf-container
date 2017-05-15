@@ -1,7 +1,7 @@
 node {
   def project = 'virajtest-167408'
   def appName = 'bookshelf'  
-  def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+  def imageTag = "gcr.io/${project}/${appName}"
   
 
   checkout scm
@@ -13,7 +13,6 @@ node {
   sh("gcloud docker push ${imageTag}")
   
   stage 'Deploy Application'
-  sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' ./deployment/bookshelf-worker.yaml")
-  sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' ./deployment/bookshelf-frontend.yaml")
+
   sh("kubectl apply -f deployment/")
 }
