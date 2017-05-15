@@ -15,5 +15,7 @@ node {
   stage 'Deploy Application'
   sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' bookshelf-worker.yaml")
   sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' bookshelf-frontend.yaml")
-  sh("kubectl apply -f *.yaml")
+  sh("kubectl apply -f bookshelf-frontend.yaml")
+  sh("kubectl apply -f bookshelf-worker.yaml")
+  sh("kubectl apply -f bookshelf-service.yaml")
 }
