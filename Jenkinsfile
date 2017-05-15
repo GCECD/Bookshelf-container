@@ -13,7 +13,7 @@ node {
   sh("gcloud docker push ${imageTag}")
   
   stage 'Deploy Application'
-  sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' ./deployment/bookshelf-worker.yaml")
-  sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' ./deployment/bookshelf-frontend.yaml")
-  sh("kubectl apply -f deployment/")
+  sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' bookshelf-worker.yaml")
+  sh("sed -i.bak 's#gcr.io/virajtest-167408/bookshelf#${imageTag}#' bookshelf-frontend.yaml")
+  sh("kubectl apply -f *.yaml")
 }
